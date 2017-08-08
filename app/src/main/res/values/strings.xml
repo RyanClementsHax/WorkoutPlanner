@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Workout Planner</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="days_of_week">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday!</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+    <string-array name="day_descriptions">
+        <item>Chest and Triceps</item>
+        <item>Quads and Abs</item>
+        <item>Back and Biceps</item>
+        <item>Shoulders</item>
+        <item>Hams and Abs</item>
+        <item>Rest</item>
+        <item>Rest</item>
+    </string-array>
+</resources>
