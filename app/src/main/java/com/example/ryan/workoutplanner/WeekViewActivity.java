@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ryan.workoutplanner.adapters.WeekViewAdapter;
 
@@ -47,25 +46,12 @@ public class WeekViewActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void onClick(View v) {
         String dayOfWeek = ((TextView)v.findViewById(R.id.day_of_week)).getText().toString();
+        String dayDescription = ((TextView)v.findViewById(R.id.day_description)).getText().toString();
         Intent intent = new Intent(this, DayViewActivity.class);
         intent.putExtra(StringConstants.DAY, dayOfWeek);
+        intent.putExtra(StringConstants.DAY_DESCRIPTION, dayDescription);
         startActivity(intent);
     }
 }

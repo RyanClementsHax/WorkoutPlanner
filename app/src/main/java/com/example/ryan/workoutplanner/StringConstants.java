@@ -5,4 +5,5 @@ package com.example.ryan.workoutplanner;
  */
 public class StringConstants {
     public static final String DAY = "DAY";
+    public static final String DAY_DESCRIPTION = "DAY_DESCRIPTION";
 }
