@@ -9,4 +9,5 @@
     <dimen name="list_item_margin_top_and_bottom">4dp</dimen>
     <dimen name="list_item_margin_left_and_right">6dp</dimen>
     <dimen name="list_item_title_margin_bottom">5dp</dimen>
+    <dimen name="recycler_view_padding_top_and_bottom">3dp</dimen>
 </resources>

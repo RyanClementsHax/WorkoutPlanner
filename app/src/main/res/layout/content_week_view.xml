@@ -12,6 +12,8 @@
         android:id="@+id/week_days_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/list_item_margin_top_and_bottom"
-        android:paddingBottom="@dimen/list_item_margin_top_and_bottom"/>
+        android:background="@color/colorPrimaryLight"
+        android:paddingTop="@dimen/recycler_view_padding_top_and_bottom"
+        android:paddingBottom="@dimen/recycler_view_padding_top_and_bottom"
+        android:clipToPadding="false" />
 </RelativeLayout>
