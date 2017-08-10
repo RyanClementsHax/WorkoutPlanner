@@ -19,5 +19,6 @@
         <item>Rest</item>
         <item>Rest</item>
     </string-array>
-    <string name="title_activity_day_view">DayViewActivity</string>
+    <string name="title_activity_day_view">Exercises</string>
+    <string name="title_activity_add_exercise">Add Exercise</string>
 </resources>

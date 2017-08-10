@@ -27,6 +27,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.ryan.workoutplanner.WeekViewActivity" />
         </activity>
+        <activity
+            android:name=".AddExerciseActivity"
+            android:label="@string/title_activity_add_exercise"
+            android:parentActivityName=".DayViewActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ryan.workoutplanner.DayViewActivity" />
+        </activity>
     </application>
 
 </manifest>
