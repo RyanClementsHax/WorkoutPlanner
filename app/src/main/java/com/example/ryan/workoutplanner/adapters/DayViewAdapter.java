@@ -41,22 +41,25 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        TextView numSets;
-        TextView numReps;
+        TextView nameTextView;
+        TextView weightTextView;
+        TextView numSetsTextView;
+        TextView numRepsTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            this.name = (TextView)itemView.findViewById(R.id.exercise_name);
-            this.numSets = (TextView)itemView.findViewById(R.id.num_sets);
-            this.numReps = (TextView)itemView.findViewById(R.id.num_reps);
+            this.nameTextView = (TextView)itemView.findViewById(R.id.exercise_name);
+            this.weightTextView = (TextView)itemView.findViewById(R.id.weight);
+            this.numSetsTextView = (TextView)itemView.findViewById(R.id.num_sets);
+            this.numRepsTextView = (TextView)itemView.findViewById(R.id.num_reps);
         }
 
         public void setExercise(Exercise exercise) {
-            name.setText(exercise.name);
-            numSets.setText(String.valueOf(exercise.numSets));
-            numReps.setText(String.valueOf(exercise.numReps));
+            nameTextView.setText(exercise.name);
+            weightTextView.setText(exercise.weight + exercise.weightUnit.getWeightUnitString());
+            numSetsTextView.setText(String.valueOf(exercise.numSets));
+            numRepsTextView.setText(String.valueOf(exercise.numReps));
         }
     }
 }

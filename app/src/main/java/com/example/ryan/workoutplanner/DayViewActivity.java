@@ -68,22 +68,22 @@ public class DayViewActivity extends AppCompatActivity implements View.OnClickLi
 
     private List<Exercise> getExercises(String dayOfWeek) {
         ArrayList<Exercise> exercises = new ArrayList<>();
-        exercises.add(new Exercise("Back Squats", 5, 5, null));
-        exercises.add(new Exercise("Front Squats", 4, 12, null));
-        exercises.add(new Exercise("Leg Press", 4, 12, null));
-        exercises.add(new Exercise("Leg Extensions", 4, 15, null));
-        exercises.add(new Exercise("Back Squats", 5, 5, null));
-        exercises.add(new Exercise("Front Squats", 4, 12, null));
-        exercises.add(new Exercise("Leg Press", 4, 12, null));
-        exercises.add(new Exercise("Leg Extensions", 4, 15, null));
-        exercises.add(new Exercise("Back Squats", 5, 5, null));
-        exercises.add(new Exercise("Front Squats", 4, 12, null));
-        exercises.add(new Exercise("Leg Press", 4, 12, null));
-        exercises.add(new Exercise("Leg Extensions", 4, 15, null));
-        exercises.add(new Exercise("Back Squats", 5, 5, null));
-        exercises.add(new Exercise("Front Squats", 4, 12, null));
-        exercises.add(new Exercise("Leg Press", 4, 12, null));
-        exercises.add(new Exercise("Leg Extensions", 4, 15, null));
+        exercises.add(new Exercise("Back Squats", 5, 5, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Front Squats", 4, 12, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Leg Press", 4, 12, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Leg Extensions", 4, 20, 15, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Back Squats", 5, 5, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Front Squats", 4, 12, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Leg Press", 4, 12, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Leg Extensions", 4, 15, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Back Squats", 5, 5, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Front Squats", 4, 12, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Leg Press", 4, 12, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Leg Extensions", 4, 15, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Back Squats", 5, 5, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Front Squats", 4, 12, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Leg Press", 4, 12, 20, Exercise.WeightUnit.LBS, null));
+        exercises.add(new Exercise("Leg Extensions", 4, 15, 20, Exercise.WeightUnit.LBS, null));
 
         return exercises;
     }
