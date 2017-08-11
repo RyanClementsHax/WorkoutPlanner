@@ -19,76 +19,87 @@
         android:layout_marginRight="@dimen/list_item_margin_left_and_right"
         card_view:cardCornerRadius="2dp" >
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="@dimen/list_item_padding">
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/input_layout_exercise_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true">
+                android:layout_height="wrap_content" >
 
                 <EditText
                     android:id="@+id/input_exercise_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Exercise Name" />
+                    android:hint="Exercise Name"
+                    android:inputType="text"
+                    android:imeOptions="actionNext" />
 
             </android.support.design.widget.TextInputLayout>
 
             <GridLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/input_layout_exercise_name"
-                android:layout_alignParentLeft="true"
-                android:rowCount="1"
+                android:rowCount="2"
                 android:columnCount="2">
 
-                <LinearLayout
-                    android:orientation="horizontal"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_weight"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1">
-
-                    <TextView
-                        android:id="@+id/num_sets_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:layout_marginLeft="3dp"
-                        android:text="Sets: " />
+                    android:layout_columnWeight="1" >
 
                     <EditText
-                        android:id="@+id/input_sets"
+                        android:id="@+id/input_weight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorAccent"/>
+                        android:hint="Weight"
+                        android:inputType="number"
+                        android:imeOptions="actionNext" />
 
-                </LinearLayout>
+                </android.support.design.widget.TextInputLayout>
 
-                <LinearLayout
-                    android:orientation="horizontal"
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/input_weight_unit"
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    card_view:ms_background_color="@color/colorPrimaryLight"
+                    android:layout_columnWeight="1" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_num_sets"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_columnWeight="1">
-
-                    <TextView
-                        android:id="@+id/num_reps_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Reps: " />
+                    android:layout_columnWeight="1" >
 
                     <EditText
-                        android:id="@+id/input_reps"
+                        android:id="@+id/input_num_sets"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorAccent"/>
+                        android:hint="Sets"
+                        android:inputType="number"
+                        android:imeOptions="actionNext" />
 
-                </LinearLayout>
+                </android.support.design.widget.TextInputLayout>
 
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/input_layout_num_reps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1" >
+
+                    <EditText
+                        android:id="@+id/input_num_reps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Reps"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
             </GridLayout>
-        </RelativeLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 </RelativeLayout>

@@ -21,4 +21,5 @@
     </string-array>
     <string name="title_activity_day_view">Exercises</string>
     <string name="title_activity_add_exercise">Add Exercise</string>
+    <string name="empty_input_error_message">Must input a value</string>
 </resources>

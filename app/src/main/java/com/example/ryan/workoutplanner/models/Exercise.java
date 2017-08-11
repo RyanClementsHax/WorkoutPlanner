@@ -1,5 +1,7 @@
 package com.example.ryan.workoutplanner.models;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ public class Exercise {
     }
 
     public enum WeightUnit {
-        NONE(""), LBS("lbs"), KG("kg");
+        NONE("None"), LBS("lbs"), KG("kg");
         private String weightUnitString;
 
         WeightUnit(String weightUnitString) {
@@ -32,6 +34,15 @@ public class Exercise {
 
         public String getWeightUnitString() {
             return this.weightUnitString;
+        }
+
+        public static List<String> getSpinnerList() {
+            ArrayList<String> list = new ArrayList<>();
+            list.add(NONE.getWeightUnitString());
+            list.add(LBS.getWeightUnitString());
+            list.add(KG.getWeightUnitString());
+            return list;
+
         }
     }
 }
