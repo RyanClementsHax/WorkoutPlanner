@@ -85,6 +85,7 @@ public class DayViewActivity extends AppCompatActivity implements View.OnClickLi
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         Type listType = new TypeToken<List<Exercise>>(){}.getType();
         List<Exercise> exercises = gson.fromJson(sharedPref.getString(dayOfWeek, ""), listType);
+
         if(exercises == null) {
             exercises = new ArrayList<>();
         }
@@ -116,6 +117,9 @@ public class DayViewActivity extends AppCompatActivity implements View.OnClickLi
         editor.commit();
 
         recyclerViewAdapter.notifyDataSetChanged();
+
+        noExercisesMessage.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
     }
 
     private void scrollToBottom() {

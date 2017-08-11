@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.chauthai.swipereveallayout.SwipeRevealLayout;
+import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.ryan.workoutplanner.R;
 import com.example.ryan.workoutplanner.models.Exercise;
 
@@ -16,6 +18,7 @@ import java.util.List;
  */
 public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHolder> {
     private List<Exercise> exercises;
+    private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
 
     public DayViewAdapter(List<Exercise> exercises) {
         this.exercises = exercises;
@@ -23,16 +26,17 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
 
     @Override
     public DayViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.exercise, parent, false);
-        ViewHolder vh = new ViewHolder(v);
 
-        return vh;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(DayViewAdapter.ViewHolder holder, int position) {
-        holder.setExercise(exercises.get(position));
+        Exercise exercise = exercises.get(position);
+        viewBinderHelper.bind(holder.swipeRevealLayout, exercise.uuid.toString());
+        holder.setExercise(exercise);
     }
 
     @Override
@@ -45,6 +49,7 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
         TextView weightTextView;
         TextView numSetsTextView;
         TextView numRepsTextView;
+        SwipeRevealLayout swipeRevealLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -53,6 +58,7 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
             this.weightTextView = (TextView)itemView.findViewById(R.id.weight);
             this.numSetsTextView = (TextView)itemView.findViewById(R.id.num_sets);
             this.numRepsTextView = (TextView)itemView.findViewById(R.id.num_reps);
+            this.swipeRevealLayout = (SwipeRevealLayout)itemView.findViewById(R.id.day_view_swipe_reveal_layout);
         }
 
         public void setExercise(Exercise exercise) {

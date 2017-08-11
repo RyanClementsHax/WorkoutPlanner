@@ -3,6 +3,7 @@ package com.example.ryan.workoutplanner.models;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Ryan on 8/8/2017.
@@ -14,6 +15,7 @@ public class Exercise implements Serializable {
     public int weight;
     public WeightUnit weightUnit;
     public List<String> notes;
+    public UUID uuid;
 
     public Exercise(String name, int numSets, int numReps, int weight, WeightUnit weightUnit, List<String> notes) {
         this.name = name;
@@ -22,6 +24,7 @@ public class Exercise implements Serializable {
         this.notes = notes;
         this.weight = weight;
         this.weightUnit = weightUnit;
+        this.uuid = UUID.randomUUID();
     }
 
     public enum WeightUnit {
