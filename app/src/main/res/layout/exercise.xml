@@ -5,20 +5,17 @@
     android:id="@+id/day_view_swipe_reveal_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/list_item_margin_top_and_bottom"
-    android:paddingBottom="@dimen/list_item_margin_top_and_bottom"
-    android:paddingRight="@dimen/list_item_margin_left_and_right"
     app:mode="same_level"
     app:dragEdge="right">
 
     <include
         layout="@layout/exercise_item_action_buttons"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
     <include
         layout="@layout/exercise_item_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
 </com.chauthai.swipereveallayout.SwipeRevealLayout>

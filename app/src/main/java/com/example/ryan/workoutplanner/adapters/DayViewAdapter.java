@@ -1,5 +1,6 @@
 package com.example.ryan.workoutplanner.adapters;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;

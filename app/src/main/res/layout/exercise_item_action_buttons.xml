@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/exercise_action_buttons"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="horizontal"
@@ -24,6 +25,7 @@
         android:id="@+id/clear_layout"
         android:layout_width="115dp"
         android:layout_height="115dp"
+        android:layout_marginRight="@dimen/list_item_margin_left_and_right"
         android:background="@color/colorAccent">
 
         <ImageView

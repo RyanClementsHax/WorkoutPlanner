@@ -9,6 +9,9 @@
         android:id="@+id/card_view"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/list_item_margin_top_and_bottom"
+        android:layout_marginBottom="@dimen/list_item_margin_top_and_bottom"
+        android:layout_marginRight="@dimen/list_item_margin_left_and_right"
         android:layout_marginLeft="@dimen/list_item_margin_left_and_right"
         card_view:cardCornerRadius="2dp">
 
