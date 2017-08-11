@@ -1,13 +1,13 @@
 package com.example.ryan.workoutplanner.models;
 
-import java.lang.reflect.Array;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Ryan on 8/8/2017.
  */
-public class Exercise {
+public class Exercise implements Serializable {
     public String name;
     public int numSets;
     public int numReps;

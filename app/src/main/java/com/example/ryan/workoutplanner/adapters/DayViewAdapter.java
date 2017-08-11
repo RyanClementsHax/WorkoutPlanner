@@ -57,7 +57,11 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
 
         public void setExercise(Exercise exercise) {
             nameTextView.setText(exercise.name);
-            weightTextView.setText(exercise.weight + exercise.weightUnit.getWeightUnitString());
+            if(exercise.weightUnit == Exercise.WeightUnit.NONE) {
+                weightTextView.setText(String.valueOf(exercise.weight));
+            } else {
+                weightTextView.setText(exercise.weight + exercise.weightUnit.getWeightUnitString());
+            }
             numSetsTextView.setText(String.valueOf(exercise.numSets));
             numRepsTextView.setText(String.valueOf(exercise.numReps));
         }

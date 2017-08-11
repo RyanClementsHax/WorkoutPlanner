@@ -1,18 +1,21 @@
 package com.example.ryan.workoutplanner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import com.example.ryan.workoutplanner.models.Exercise;
 import com.example.ryan.workoutplanner.validators.InputValidator;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
+import java.util.List;
+
 public class AddExerciseActivity extends AppCompatActivity {
+    public static final int ADD_EXERCISE_RESULT_CODE = 1;
     private InputValidator validator;
     private EditText exerciseName;
     private EditText weight;
@@ -20,6 +23,7 @@ public class AddExerciseActivity extends AppCompatActivity {
     private EditText numReps;
     private MaterialSpinner weightUnit;
     private FloatingActionButton saveBtn;
+    private List<String> spinnerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,8 @@ public class AddExerciseActivity extends AppCompatActivity {
         setUpInputValidation(numSets);
         setUpInputValidation(numReps);
 
-        weightUnit.setItems(Exercise.WeightUnit.getSpinnerList());
+        spinnerList = Exercise.WeightUnit.getSpinnerList();
+        weightUnit.setItems(spinnerList);
 
         saveBtn = (FloatingActionButton)findViewById(R.id.save_exercise);
         saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +72,18 @@ public class AddExerciseActivity extends AppCompatActivity {
     private void saveExercise() {
         validateEditTexts();
         if(allFieldsValid()) {
-            onBackPressed();
+            Exercise resultExercise = new Exercise(
+                    exerciseName.getText().toString(),
+                    Integer.parseInt(numSets.getText().toString()),
+                    Integer.parseInt(numReps.getText().toString()),
+                    Integer.parseInt(weight.getText().toString()),
+                    Exercise.WeightUnit.valueOf(spinnerList.get(weightUnit.getSelectedIndex()).toUpperCase()),
+                    null
+            );
+            Intent resultIntent = new Intent(this, AddExerciseActivity.class);
+            resultIntent.putExtra(getResources().getString(R.string.add_exercise_result), resultExercise);
+            setResult(ADD_EXERCISE_RESULT_CODE, resultIntent);
+            finish();
         }
     }
 

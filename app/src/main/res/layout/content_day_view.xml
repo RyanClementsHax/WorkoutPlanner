@@ -8,6 +8,15 @@
     tools:context="com.example.ryan.workoutplanner.DayViewActivity"
     tools:showIn="@layout/activity_day_view">
 
+    <TextView
+        android:id="@+id/no_exercises_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="No exercises added"
+        android:textColor="@color/colorPrimary"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/exercises_recycler_view"
         android:layout_width="match_parent"
@@ -15,6 +24,7 @@
         android:background="@color/colorPrimaryLight"
         android:paddingTop="@dimen/recycler_view_padding_top_and_bottom"
         android:paddingBottom="@dimen/recycler_view_padding_top_and_bottom"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"
+        android:visibility="gone"/>
 
 </RelativeLayout>
