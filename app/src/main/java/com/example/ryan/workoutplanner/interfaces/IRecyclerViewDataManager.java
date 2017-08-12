@@ -1,5 +1,7 @@
 package com.example.ryan.workoutplanner.interfaces;
 
+import android.view.View;
+
 import java.util.List;
 
 /**
@@ -7,7 +9,9 @@ import java.util.List;
  */
 
 public interface IRecyclerViewDataManager<T> {
+    View.OnClickListener getItemClickListener();
     void removeItem(int position);
     void editItem(int position);
-    void updateData(List<T> data);
+    void updateItems(List<T> data);
+    List<T> getItems();
 }

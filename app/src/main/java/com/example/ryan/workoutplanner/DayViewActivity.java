@@ -14,15 +14,18 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.ryan.workoutplanner.adapters.DayViewAdapter;
-import com.example.ryan.workoutplanner.adapters.ExercisesSharedPreferencesAdapter;
+import com.example.ryan.workoutplanner.adapters.SharedPreferencesAdapter;
 import com.example.ryan.workoutplanner.callbacks.ItemTouchHelperCallback;
 import com.example.ryan.workoutplanner.interfaces.IRecyclerViewDataManager;
 import com.example.ryan.workoutplanner.models.Exercise;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DayViewActivity extends AppCompatActivity implements IRecyclerViewDataManager<Exercise> {
-    private ExercisesSharedPreferencesAdapter exercisesAdapter;
+    private SharedPreferencesAdapter sharedPreferencesAdapter;
     private RecyclerView recyclerView;
     private DayViewAdapter recyclerViewAdapter;
     private RecyclerView.LayoutManager recyclerViewLayoutManager;
@@ -45,7 +48,12 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
             dayDescription = sharedPref.getString(StringConstants.DAY_DESCRIPTION, "N/A");
         }
 
-        exercisesAdapter = new ExercisesSharedPreferencesAdapter(this, dayOfWeek);
+        Type exerciseListType = new TypeToken<List<Exercise>>(){}.getType();
+        this.sharedPreferencesAdapter = new SharedPreferencesAdapter(this, exerciseListType, dayOfWeek);
+        this.exercises = (List<Exercise>) sharedPreferencesAdapter.getItem();
+        if(exercises == null) {
+            exercises = new ArrayList<>();
+        }
 
         setContentView(R.layout.activity_day_view);
 
@@ -64,11 +72,9 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
             }
         });
 
-        exercises = getExercises();
-
         recyclerView = (RecyclerView)findViewById(R.id.exercises_recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerViewAdapter = new DayViewAdapter(exercises, this);
+        recyclerViewAdapter = new DayViewAdapter(this);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
@@ -94,11 +100,7 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
     @Override
     public void onDestroy() {
         super.onDestroy();
-        exercisesAdapter.updateExercises(exercises);
-    }
-
-    private List<Exercise> getExercises() {
-        return exercisesAdapter.getExercises();
+        sharedPreferencesAdapter.updateItem(exercises);
     }
 
     @Override
@@ -126,6 +128,11 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
     }
 
     @Override
+    public View.OnClickListener getItemClickListener() {
+        return null;
+    }
+
+    @Override
     public void removeItem(int position) {
         exercises.remove(position);
         setEmptyMessageIfExercisesEmpty();
@@ -140,8 +147,13 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
     }
 
     @Override
-    public void updateData(List<Exercise> data) {
-        exercisesAdapter.updateExercises(data);
+    public void updateItems(List<Exercise> data) {
+        sharedPreferencesAdapter.updateItem(data);
+    }
+
+    @Override
+    public List<Exercise> getItems() {
+        return exercises;
     }
 
     private void addExercise(Exercise exercise) {

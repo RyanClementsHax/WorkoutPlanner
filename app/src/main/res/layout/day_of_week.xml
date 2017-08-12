@@ -1,43 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.chauthai.swipereveallayout.SwipeRevealLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/week_view_swipe_reveal_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryLight">
+    android:layout_height="wrap_content"
+    app:mode="same_level"
+    app:dragEdge="right">
 
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
-        android:layout_height="wrap_content"
+    <include
+        layout="@layout/day_of_week_action_buttons"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+    <include
+        layout="@layout/day_of_week_content"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/list_item_margin_top_and_bottom"
-        android:layout_marginBottom="@dimen/list_item_margin_top_and_bottom"
-        android:layout_marginLeft="@dimen/list_item_margin_left_and_right"
-        android:layout_marginRight="@dimen/list_item_margin_left_and_right"
-        card_view:cardCornerRadius="2dp">
+        android:layout_height="match_parent" />
 
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/list_item_padding">
-
-            <TextView
-                android:id="@+id/day_of_week"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Title"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <TextView
-                android:id="@+id/day_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Sub Text"
-                android:textColor="@color/colorAccent" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+</com.chauthai.swipereveallayout.SwipeRevealLayout>
