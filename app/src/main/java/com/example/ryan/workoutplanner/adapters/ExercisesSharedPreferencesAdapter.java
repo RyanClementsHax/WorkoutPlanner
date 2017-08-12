@@ -10,7 +10,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,24 +38,8 @@ public class ExercisesSharedPreferencesAdapter {
         return exercises;
     }
 
-    public void addExercise(Exercise exercise) {
-        exercises.add(exercise);
-        putObject(exercises);
-    }
-
-    public void editExercise(Exercise exercise) {
-        for (int i = 0; i < exercises.size(); i++ ) {
-            Exercise item = exercises.get(i);
-            if(item.uuid.equals(exercise.uuid)) {
-                exercises.set(i, exercise);
-            }
-        }
-        putObject(exercises);
-    }
-
-    public void remove(int position) {
-        exercises.remove(position);
-        putObject(exercises);
+    public void updateExercises(List<Exercise> data) {
+        putObject(data);
     }
 
     private void putObject(Object value) {

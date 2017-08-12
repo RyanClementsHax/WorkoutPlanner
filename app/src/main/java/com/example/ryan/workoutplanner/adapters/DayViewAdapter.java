@@ -10,21 +10,21 @@ import android.widget.TextView;
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.ryan.workoutplanner.R;
+import com.example.ryan.workoutplanner.interfaces.IItemTouchHelperAdapter;
 import com.example.ryan.workoutplanner.interfaces.IRecyclerViewDataManager;
 import com.example.ryan.workoutplanner.models.Exercise;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Ryan on 8/8/2017.
  */
-public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHolder> {
+public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHolder> implements IItemTouchHelperAdapter{
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     private List<Exercise> exercises;
-    private IRecyclerViewDataManager dataManager;
+    private IRecyclerViewDataManager<Exercise> dataManager;
 
-    public DayViewAdapter(List<Exercise> exercises, IRecyclerViewDataManager dataManager) {
+    public DayViewAdapter(List<Exercise> exercises, IRecyclerViewDataManager<Exercise> dataManager) {
         this.exercises = exercises;
         this.dataManager = dataManager;
     }
@@ -47,6 +47,14 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
     @Override
     public int getItemCount() {
         return exercises.size();
+    }
+
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        Exercise prev = exercises.remove(fromPosition);
+        exercises.add(toPosition, prev);
+        notifyItemMoved(fromPosition, toPosition);
+        dataManager.updateData(exercises);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

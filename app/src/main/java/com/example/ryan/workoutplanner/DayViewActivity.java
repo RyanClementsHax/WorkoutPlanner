@@ -9,18 +9,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.TextView;
 
-import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.example.ryan.workoutplanner.adapters.DayViewAdapter;
 import com.example.ryan.workoutplanner.adapters.ExercisesSharedPreferencesAdapter;
+import com.example.ryan.workoutplanner.callbacks.ItemTouchHelperCallback;
 import com.example.ryan.workoutplanner.interfaces.IRecyclerViewDataManager;
 import com.example.ryan.workoutplanner.models.Exercise;
 
 import java.util.List;
 
-public class DayViewActivity extends AppCompatActivity implements IRecyclerViewDataManager {
+public class DayViewActivity extends AppCompatActivity implements IRecyclerViewDataManager<Exercise> {
     private ExercisesSharedPreferencesAdapter exercisesAdapter;
     private RecyclerView recyclerView;
     private DayViewAdapter recyclerViewAdapter;
@@ -29,6 +30,7 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
     private String dayDescription;
     private List<Exercise> exercises;
     private TextView noExercisesMessage;
+    private ItemTouchHelper itemTouchHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,10 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
         recyclerViewLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
 
+        ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(recyclerViewAdapter);
+        itemTouchHelper = new ItemTouchHelper(callback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         noExercisesMessage = (TextView)findViewById(R.id.no_exercises_message);
         setEmptyMessageIfExercisesEmpty();
     }
@@ -83,6 +89,12 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
         editor.putString(StringConstants.DAY, dayOfWeek);
         editor.putString(StringConstants.DAY_DESCRIPTION, dayDescription);
         editor.commit();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        exercisesAdapter.updateExercises(exercises);
     }
 
     private List<Exercise> getExercises() {
@@ -100,20 +112,22 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
         if(resultCode == RESULT_CANCELED) {
             return;
         }
+
+        Exercise exercise = null;
         if(requestCode == AddAndEditExerciseActivity.ADD_EXERCISE_RESULT_CODE) {
-            Exercise addExercise = (Exercise)data.getExtras().getSerializable(getResources().getString(R.string.add_exercise_result));
-            addExercise(addExercise);
-            scrollToPosition(exercises.size() - 1);
+            exercise = (Exercise)data.getExtras().getSerializable(getResources().getString(R.string.add_exercise_result));
+            addExercise(exercise);
         } else if(requestCode == AddAndEditExerciseActivity.EDIT_EXERCISE_RESULT_CODE) {
-            Exercise editExercise = (Exercise)data.getExtras().getSerializable(getResources().getString(R.string.edit_exercise_result));
-            editExercise(editExercise);
-            scrollToPosition(exercises.indexOf(editExercise));
+            exercise = (Exercise)data.getExtras().getSerializable(getResources().getString(R.string.edit_exercise_result));
+            editExercise(exercise);
         }
+
+        recyclerViewLayoutManager.scrollToPosition(exercises.indexOf(exercise));
     }
 
     @Override
     public void removeItem(int position) {
-        exercisesAdapter.remove(position);
+        exercises.remove(position);
         setEmptyMessageIfExercisesEmpty();
     }
 
@@ -125,8 +139,13 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
         startActivityForResult(intent, AddAndEditExerciseActivity.EDIT_EXERCISE_RESULT_CODE);
     }
 
+    @Override
+    public void updateData(List<Exercise> data) {
+        exercisesAdapter.updateExercises(data);
+    }
+
     private void addExercise(Exercise exercise) {
-        exercisesAdapter.addExercise(exercise);
+        exercises.add(exercise);
         recyclerViewAdapter.notifyDataSetChanged();
 
         noExercisesMessage.setVisibility(View.GONE);
@@ -134,12 +153,12 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
     }
 
     private void editExercise(Exercise exercise) {
-        exercisesAdapter.editExercise(exercise);
-        recyclerViewAdapter.notifyDataSetChanged();
-    }
-
-    private void scrollToPosition(int position) {
-        recyclerViewLayoutManager.scrollToPosition(position);
+        for (int i = 0; i < exercises.size(); i++ ) {
+            Exercise item = exercises.get(i);
+            if(item.uuid.equals(exercise.uuid)) {
+                exercises.set(i, exercise);
+            }
+        }
     }
 
     private void setEmptyMessageIfExercisesEmpty() {
