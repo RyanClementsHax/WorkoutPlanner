@@ -14,11 +14,13 @@
         android:background="@color/warning">
 
         <ImageView
+            android:id="@+id/edit_icon"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@mipmap/ic_edit_white"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:duplicateParentState="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -29,11 +31,13 @@
         android:background="@color/colorAccent">
 
         <ImageView
+            android:id="@+id/clear_icon"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:src="@mipmap/ic_clear_white"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:duplicateParentState="true"/>
 
     </RelativeLayout>
 </LinearLayout>

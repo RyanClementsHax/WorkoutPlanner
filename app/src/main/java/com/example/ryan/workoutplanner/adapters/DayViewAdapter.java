@@ -1,15 +1,16 @@
 package com.example.ryan.workoutplanner.adapters;
 
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.chauthai.swipereveallayout.SwipeRevealLayout;
 import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.ryan.workoutplanner.R;
+import com.example.ryan.workoutplanner.interfaces.IRecyclerViewDataManager;
 import com.example.ryan.workoutplanner.models.Exercise;
 
 import java.util.List;
@@ -18,11 +19,13 @@ import java.util.List;
  * Created by Ryan on 8/8/2017.
  */
 public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHolder> {
-    private List<Exercise> exercises;
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
+    private List<Exercise> exercises;
+    private IRecyclerViewDataManager<Exercise> dataManager;
 
-    public DayViewAdapter(List<Exercise> exercises) {
+    public DayViewAdapter(List<Exercise> exercises, IRecyclerViewDataManager<Exercise> dataManager) {
         this.exercises = exercises;
+        this.dataManager = dataManager;
     }
 
     @Override
@@ -45,11 +48,13 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
         return exercises.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView weightTextView;
         TextView numSetsTextView;
         TextView numRepsTextView;
+        RelativeLayout editLayout;
+        RelativeLayout clearLayout;
         SwipeRevealLayout swipeRevealLayout;
 
         public ViewHolder(View itemView) {
@@ -59,6 +64,8 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
             this.weightTextView = (TextView)itemView.findViewById(R.id.weight);
             this.numSetsTextView = (TextView)itemView.findViewById(R.id.num_sets);
             this.numRepsTextView = (TextView)itemView.findViewById(R.id.num_reps);
+            this.editLayout = (RelativeLayout)itemView.findViewById(R.id.edit_layout);
+            this.clearLayout = (RelativeLayout)itemView.findViewById(R.id.clear_layout);
             this.swipeRevealLayout = (SwipeRevealLayout)itemView.findViewById(R.id.day_view_swipe_reveal_layout);
         }
 
@@ -71,6 +78,17 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
             }
             numSetsTextView.setText(String.valueOf(exercise.numSets));
             numRepsTextView.setText(String.valueOf(exercise.numReps));
+
+            clearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position >= 0) {
+                        dataManager.removeItem(position);
+                        notifyItemRemoved(position);
+                    }
+                }
+            });
         }
     }
 }
