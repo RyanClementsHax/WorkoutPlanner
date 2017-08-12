@@ -21,6 +21,10 @@
     </string-array>
     <string name="title_activity_day_view">Exercises</string>
     <string name="title_activity_add_exercise">Add Exercise</string>
+    <string name="title_activity_edit_exercise">Edit Exercise</string>
     <string name="empty_input_error_message">Must input a value</string>
     <string name="add_exercise_result">add_exercise_result</string>
+    <string name="edit_exercise">edit_exercise</string>
+    <string name="edit_exercise_result">edit_exercise_result</string>
+    <string name="request_code">request_code</string>
 </resources>

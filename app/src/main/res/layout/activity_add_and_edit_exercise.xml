@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ryan.workoutplanner.AddExerciseActivity"
+    tools:context="com.example.ryan.workoutplanner.AddAndEditExerciseActivity"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -22,7 +22,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_add_exercise" />
+    <include layout="@layout/content_add_and_edit_exercise" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/save_exercise"

@@ -28,7 +28,7 @@
                 android:value="com.example.ryan.workoutplanner.WeekViewActivity" />
         </activity>
         <activity
-            android:name=".AddExerciseActivity"
+            android:name=".AddAndEditExerciseActivity"
             android:label="@string/title_activity_add_exercise"
             android:parentActivityName=".DayViewActivity"
             android:theme="@style/AppTheme.NoActionBar">

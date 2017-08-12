@@ -14,8 +14,10 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.List;
 
-public class AddExerciseActivity extends AppCompatActivity {
+public class AddAndEditExerciseActivity extends AppCompatActivity {
     public static final int ADD_EXERCISE_RESULT_CODE = 1;
+    public static final int EDIT_EXERCISE_RESULT_CODE = 2;
+    private boolean isEditing = false;
     private InputValidator validator;
     private EditText exerciseName;
     private EditText weight;
@@ -24,11 +26,12 @@ public class AddExerciseActivity extends AppCompatActivity {
     private MaterialSpinner weightUnit;
     private FloatingActionButton saveBtn;
     private List<String> spinnerList;
+    private Exercise exercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_exercise);
+        setContentView(R.layout.activity_add_and_edit_exercise);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -46,6 +49,19 @@ public class AddExerciseActivity extends AppCompatActivity {
 
         spinnerList = Exercise.WeightUnit.getSpinnerList();
         weightUnit.setItems(spinnerList);
+
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if(extras != null && extras.getInt(getResources().getString(R.string.request_code), 0) == EDIT_EXERCISE_RESULT_CODE) {
+            isEditing = true;
+            getSupportActionBar().setTitle(getResources().getString(R.string.title_activity_edit_exercise));
+            exercise = (Exercise)extras.getSerializable(getResources().getString(R.string.edit_exercise));
+            exerciseName.setText(exercise.name);
+            weight.setText(String.valueOf(exercise.weight));
+            numSets.setText(String.valueOf(exercise.numSets));
+            numReps.setText(String.valueOf(exercise.numReps));
+            weightUnit.setSelectedIndex(spinnerList.indexOf(exercise.weightUnit.getWeightUnitString()));
+        }
 
         saveBtn = (FloatingActionButton)findViewById(R.id.save_exercise);
         saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -80,9 +96,15 @@ public class AddExerciseActivity extends AppCompatActivity {
                     Exercise.WeightUnit.valueOf(spinnerList.get(weightUnit.getSelectedIndex()).toUpperCase()),
                     null
             );
-            Intent resultIntent = new Intent(this, AddExerciseActivity.class);
-            resultIntent.putExtra(getResources().getString(R.string.add_exercise_result), resultExercise);
-            setResult(ADD_EXERCISE_RESULT_CODE, resultIntent);
+            Intent resultIntent = new Intent(this, AddAndEditExerciseActivity.class);
+            if(isEditing) {
+                resultExercise.uuid = exercise.uuid;
+                resultIntent.putExtra(getResources().getString(R.string.edit_exercise_result), resultExercise);
+                setResult(EDIT_EXERCISE_RESULT_CODE, resultIntent);
+            } else {
+                resultIntent.putExtra(getResources().getString(R.string.add_exercise_result), resultExercise);
+                setResult(ADD_EXERCISE_RESULT_CODE, resultIntent);
+            }
             finish();
         }
     }

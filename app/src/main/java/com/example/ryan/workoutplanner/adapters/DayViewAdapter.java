@@ -13,6 +13,7 @@ import com.example.ryan.workoutplanner.R;
 import com.example.ryan.workoutplanner.interfaces.IRecyclerViewDataManager;
 import com.example.ryan.workoutplanner.models.Exercise;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,9 +22,9 @@ import java.util.List;
 public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHolder> {
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     private List<Exercise> exercises;
-    private IRecyclerViewDataManager<Exercise> dataManager;
+    private IRecyclerViewDataManager dataManager;
 
-    public DayViewAdapter(List<Exercise> exercises, IRecyclerViewDataManager<Exercise> dataManager) {
+    public DayViewAdapter(List<Exercise> exercises, IRecyclerViewDataManager dataManager) {
         this.exercises = exercises;
         this.dataManager = dataManager;
     }
@@ -86,6 +87,18 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
                     if(position >= 0) {
                         dataManager.removeItem(position);
                         notifyItemRemoved(position);
+                    }
+                }
+            });
+
+            editLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position >= 0) {
+                        swipeRevealLayout.close(true);
+                        dataManager.editItem(position);
+                        notifyDataSetChanged();
                     }
                 }
             });
