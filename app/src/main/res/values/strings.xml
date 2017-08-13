@@ -30,4 +30,5 @@
     <string name="week_view_preference_key">week_view_preference_key</string>
     <string name="day_view_preference_key">day_view_preference_key</string>
     <string name="is_first_time_app_start_up">is_first_time_app_start_up</string>
+    <string name="edit_day_description_alert_dialog_title">Edit Description</string>
 </resources>

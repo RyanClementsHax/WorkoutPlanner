@@ -11,6 +11,7 @@
         android:id="@+id/edit_layout"
         android:layout_width="86dp"
         android:layout_height="86dp"
+        android:layout_marginRight="@dimen/list_item_margin_left_and_right"
         android:background="@color/warning">
 
         <ImageView

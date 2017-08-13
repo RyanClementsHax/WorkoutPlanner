@@ -52,23 +52,33 @@ public class WeekViewAdapter extends RecyclerView.Adapter<WeekViewAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView dayOfWeek;
-        TextView dayDescription;
+        TextView dayOfWeekTextView;
+        TextView dayDescriptionTextView;
         SwipeRevealLayout swipeRevealLayout;
         RelativeLayout editLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            this.dayOfWeek = (TextView)itemView.findViewById(R.id.day_of_week);
-            this.dayDescription = (TextView)itemView.findViewById(R.id.day_description);
+            this.dayOfWeekTextView = (TextView)itemView.findViewById(R.id.day_of_week);
+            this.dayDescriptionTextView = (TextView)itemView.findViewById(R.id.day_description);
             this.swipeRevealLayout = (SwipeRevealLayout)itemView.findViewById(R.id.week_view_swipe_reveal_layout);
             this.editLayout = (RelativeLayout)itemView.findViewById(R.id.edit_layout);
         }
 
         public void bind(DayOfWeek dayOfWeek) {
-            this.dayOfWeek.setText(dayOfWeek.day);
-            this.dayDescription.setText(dayOfWeek.description);
+            dayOfWeekTextView.setText(dayOfWeek.day);
+            dayDescriptionTextView.setText(dayOfWeek.description);
+            editLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position >= 0) {
+                        swipeRevealLayout.close(true);
+                        dataManager.editItem(position);
+                    }
+                }
+            });
         }
     }
 }
