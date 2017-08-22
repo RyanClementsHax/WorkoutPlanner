@@ -21,10 +21,10 @@ import android.widget.TextView;
 
 import com.example.ryan.workoutplanner.R;
 import com.example.ryan.workoutplanner.WorkoutPlannerApplication;
-import com.example.ryan.workoutplanner.config.StringConstants;
-import com.example.ryan.workoutplanner.adapters.SharedPreferencesAdapter;
 import com.example.ryan.workoutplanner.adapters.WeekViewAdapter;
+import com.example.ryan.workoutplanner.config.StringConstants;
 import com.example.ryan.workoutplanner.interfaces.IRecyclerViewDataManager;
+import com.example.ryan.workoutplanner.interfaces.ISharedPreferencesService;
 import com.example.ryan.workoutplanner.models.DayOfWeek;
 import com.google.gson.reflect.TypeToken;
 
@@ -37,7 +37,7 @@ import javax.inject.Inject;
 
 public class WeekViewActivity extends AppCompatActivity implements IRecyclerViewDataManager<DayOfWeek> {
     @Inject
-    SharedPreferencesAdapter sharedPreferencesAdapter;
+    ISharedPreferencesService sharedPreferencesService;
     @Inject
     WeekViewAdapter recyclerViewAdapter;
     @Inject
@@ -59,7 +59,7 @@ public class WeekViewActivity extends AppCompatActivity implements IRecyclerView
 
         this.preferenceKey = getResources().getString(R.string.week_view_preference_key);
         this.dayListType = new TypeToken<List<DayOfWeek>>(){}.getType();
-        this.daysOfWeek = (List<DayOfWeek>) sharedPreferencesAdapter.getObject(preferenceKey, dayListType);
+        this.daysOfWeek = (List<DayOfWeek>) sharedPreferencesService.getObject(preferenceKey, dayListType);
         if(daysOfWeek == null) {
             daysOfWeek = new ArrayList<>();
         }
@@ -87,7 +87,7 @@ public class WeekViewActivity extends AppCompatActivity implements IRecyclerView
     @Override
     public void onDestroy() {
         super.onDestroy();
-        sharedPreferencesAdapter.updateObject(preferenceKey, dayListType, daysOfWeek);
+        sharedPreferencesService.updateObject(preferenceKey, dayListType, daysOfWeek);
     }
 
     @Override
@@ -178,7 +178,7 @@ public class WeekViewActivity extends AppCompatActivity implements IRecyclerView
                 daysOfWeek.add(dayOfWeek);
             }
 
-            sharedPreferencesAdapter.updateObject(preferenceKey, dayListType, daysOfWeek);
+            sharedPreferencesService.updateObject(preferenceKey, dayListType, daysOfWeek);
         }
     }
 }

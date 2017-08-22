@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.example.ryan.workoutplanner.interfaces.ISharedPreferencesService;
 import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
@@ -12,11 +13,11 @@ import java.lang.reflect.Type;
  * Created by Ryan on 8/12/2017.
  */
 
-public class SharedPreferencesAdapter {
+public class SharedPreferencesService implements ISharedPreferencesService {
     private SharedPreferences sharedPreferences;
     private Gson gson;
 
-    public SharedPreferencesAdapter(Application application, Gson gson) {
+    public SharedPreferencesService(Application application, Gson gson) {
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application);
         this.gson = gson;
     }

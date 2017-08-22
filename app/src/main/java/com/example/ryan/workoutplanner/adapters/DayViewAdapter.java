@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by Ryan on 8/8/2017.
  */
-public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHolder> implements IItemTouchHelperAdapter{
+public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHolder> implements IItemTouchHelperAdapter {
     private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
     private List<Exercise> exercises;
     private IRecyclerViewDataManager<Exercise> dataManager;

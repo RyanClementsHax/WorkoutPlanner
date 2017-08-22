@@ -15,11 +15,11 @@ import android.widget.TextView;
 
 import com.example.ryan.workoutplanner.R;
 import com.example.ryan.workoutplanner.WorkoutPlannerApplication;
-import com.example.ryan.workoutplanner.config.StringConstants;
 import com.example.ryan.workoutplanner.adapters.DayViewAdapter;
-import com.example.ryan.workoutplanner.adapters.SharedPreferencesAdapter;
 import com.example.ryan.workoutplanner.callbacks.ItemTouchHelperCallback;
+import com.example.ryan.workoutplanner.config.StringConstants;
 import com.example.ryan.workoutplanner.interfaces.IRecyclerViewDataManager;
+import com.example.ryan.workoutplanner.interfaces.ISharedPreferencesService;
 import com.example.ryan.workoutplanner.models.Exercise;
 import com.google.gson.reflect.TypeToken;
 
@@ -31,7 +31,7 @@ import javax.inject.Inject;
 
 public class DayViewActivity extends AppCompatActivity implements IRecyclerViewDataManager<Exercise> {
     @Inject
-    SharedPreferencesAdapter sharedPreferencesAdapter;
+    ISharedPreferencesService sharedPreferencesAdapter;
     @Inject
     DayViewAdapter recyclerViewAdapter;
     @Inject

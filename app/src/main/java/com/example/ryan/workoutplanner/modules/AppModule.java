@@ -3,11 +3,12 @@ package com.example.ryan.workoutplanner.modules;
 import android.app.Application;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.ryan.workoutplanner.adapters.DayViewAdapter;
-import com.example.ryan.workoutplanner.adapters.SharedPreferencesAdapter;
+import com.example.ryan.workoutplanner.adapters.SharedPreferencesService;
 import com.example.ryan.workoutplanner.adapters.WeekViewAdapter;
 import com.example.ryan.workoutplanner.callbacks.ItemTouchHelperCallback;
+import com.example.ryan.workoutplanner.interfaces.IInputValidator;
+import com.example.ryan.workoutplanner.interfaces.ISharedPreferencesService;
 import com.example.ryan.workoutplanner.validators.InputValidator;
 import com.google.gson.Gson;
 
@@ -32,8 +33,8 @@ public class AppModule {
     }
 
     @Provides
-    public SharedPreferencesAdapter provideSharedPreferencesAdapter(Application application, Gson gson) {
-        return new SharedPreferencesAdapter(application, gson);
+    public ISharedPreferencesService provideSharedPreferencesAdapter(Application application, Gson gson) {
+        return new SharedPreferencesService(application, gson);
     }
 
     @Provides
@@ -47,7 +48,7 @@ public class AppModule {
     }
 
     @Provides
-    public InputValidator provideInputValidator() {
+    public IInputValidator provideInputValidator() {
         return new InputValidator();
     }
 
