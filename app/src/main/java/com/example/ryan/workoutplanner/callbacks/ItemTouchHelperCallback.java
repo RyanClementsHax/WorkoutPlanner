@@ -11,11 +11,7 @@ import com.example.ryan.workoutplanner.interfaces.IItemTouchHelperAdapter;
 
 public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
-    private final IItemTouchHelperAdapter itemTouchHelperAdapter;
-
-    public ItemTouchHelperCallback(IItemTouchHelperAdapter adapter) {
-        itemTouchHelperAdapter = adapter;
-    }
+    private IItemTouchHelperAdapter itemTouchHelperAdapter;
 
     @Override
     public boolean isLongPressDragEnabled() {
@@ -38,5 +34,12 @@ public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int position) {
         //don't care about this event
+    }
+
+    public void setItemTouchHelperAdapter(IItemTouchHelperAdapter adapter) {
+        if(adapter == null) {
+            throw new IllegalArgumentException("The adapter provided cannot be null");
+        }
+        this.itemTouchHelperAdapter = adapter;
     }
 }

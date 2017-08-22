@@ -1,4 +1,4 @@
-package com.example.ryan.workoutplanner;
+package com.example.ryan.workoutplanner.activities;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.view.LayoutInflaterFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +19,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.ryan.workoutplanner.R;
+import com.example.ryan.workoutplanner.WorkoutPlannerApplication;
+import com.example.ryan.workoutplanner.config.StringConstants;
 import com.example.ryan.workoutplanner.adapters.SharedPreferencesAdapter;
 import com.example.ryan.workoutplanner.adapters.WeekViewAdapter;
 import com.example.ryan.workoutplanner.interfaces.IRecyclerViewDataManager;
@@ -31,24 +33,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class WeekViewActivity extends AppCompatActivity implements IRecyclerViewDataManager<DayOfWeek>{
+import javax.inject.Inject;
+
+public class WeekViewActivity extends AppCompatActivity implements IRecyclerViewDataManager<DayOfWeek> {
+    @Inject
+    SharedPreferencesAdapter sharedPreferencesAdapter;
+    @Inject
+    WeekViewAdapter recyclerViewAdapter;
+    @Inject
+    LinearLayoutManager recyclerViewLayoutManager;
+
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter recyclerViewAdapter;
-    private RecyclerView.LayoutManager recyclerViewLayoutManager;
     private View.OnClickListener itemClickListener;
-    private SharedPreferencesAdapter sharedPreferencesAdapter;
     private List<DayOfWeek> daysOfWeek;
+    private Type dayListType;
+    private String preferenceKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((WorkoutPlannerApplication) getApplication()).getAppComponent().inject(this);
         setContentView(R.layout.activity_week_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Type dayListType = new TypeToken<List<DayOfWeek>>(){}.getType();
-        this.sharedPreferencesAdapter = new SharedPreferencesAdapter(this, dayListType, getResources().getString(R.string.week_view_preference_key));
-        this.daysOfWeek = (List<DayOfWeek>) sharedPreferencesAdapter.getItem();
+        this.preferenceKey = getResources().getString(R.string.week_view_preference_key);
+        this.dayListType = new TypeToken<List<DayOfWeek>>(){}.getType();
+        this.daysOfWeek = (List<DayOfWeek>) sharedPreferencesAdapter.getObject(preferenceKey, dayListType);
         if(daysOfWeek == null) {
             daysOfWeek = new ArrayList<>();
         }
@@ -66,18 +77,17 @@ public class WeekViewActivity extends AppCompatActivity implements IRecyclerView
             }
         };
 
+        recyclerViewAdapter.setDataManager(this);
         recyclerView = (RecyclerView)findViewById(R.id.week_days_recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerViewAdapter = new WeekViewAdapter(this);
         recyclerView.setAdapter(recyclerViewAdapter);
-        recyclerViewLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        sharedPreferencesAdapter.updateItem(daysOfWeek);
+        sharedPreferencesAdapter.updateObject(preferenceKey, dayListType, daysOfWeek);
     }
 
     @Override
@@ -168,7 +178,7 @@ public class WeekViewActivity extends AppCompatActivity implements IRecyclerView
                 daysOfWeek.add(dayOfWeek);
             }
 
-            sharedPreferencesAdapter.updateItem(daysOfWeek);
+            sharedPreferencesAdapter.updateObject(preferenceKey, dayListType, daysOfWeek);
         }
     }
 }

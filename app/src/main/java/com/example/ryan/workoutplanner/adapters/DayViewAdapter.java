@@ -24,11 +24,6 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
     private List<Exercise> exercises;
     private IRecyclerViewDataManager<Exercise> dataManager;
 
-    public DayViewAdapter(IRecyclerViewDataManager<Exercise> dataManager) {
-        this.dataManager = dataManager;
-        this.exercises = dataManager.getItems();
-    }
-
     @Override
     public DayViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
@@ -55,6 +50,11 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
         exercises.add(toPosition, prev);
         notifyItemMoved(fromPosition, toPosition);
         dataManager.updateItems(exercises);
+    }
+
+    public void setDataManager(IRecyclerViewDataManager<Exercise> dataManager) {
+        this.dataManager = dataManager;
+        this.exercises = dataManager.getItems();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

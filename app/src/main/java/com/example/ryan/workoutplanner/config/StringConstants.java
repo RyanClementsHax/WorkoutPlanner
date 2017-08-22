@@ -1,4 +1,4 @@
-package com.example.ryan.workoutplanner;
+package com.example.ryan.workoutplanner.config;
 
 /**
  * Created by Ryan on 8/8/2017.

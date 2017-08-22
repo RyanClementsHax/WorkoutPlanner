@@ -24,11 +24,6 @@ public class WeekViewAdapter extends RecyclerView.Adapter<WeekViewAdapter.ViewHo
     private IRecyclerViewDataManager<DayOfWeek> dataManager;
     private List<DayOfWeek> daysOfWeek;
 
-    public WeekViewAdapter(IRecyclerViewDataManager<DayOfWeek> dataManager) {
-        this.dataManager = dataManager;
-        this.daysOfWeek = dataManager.getItems();
-    }
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
@@ -44,6 +39,11 @@ public class WeekViewAdapter extends RecyclerView.Adapter<WeekViewAdapter.ViewHo
         DayOfWeek dayOfWeek = daysOfWeek.get(position);
         viewBinderHelper.bind(holder.swipeRevealLayout, dayOfWeek.uuid.toString());
         holder.bind(dayOfWeek);
+    }
+
+    public void setDataManager(IRecyclerViewDataManager<DayOfWeek> dataManager) {
+        this.dataManager = dataManager;
+        this.daysOfWeek = dataManager.getItems();
     }
 
     @Override

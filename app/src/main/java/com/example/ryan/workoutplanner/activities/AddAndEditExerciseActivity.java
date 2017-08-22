@@ -1,4 +1,4 @@
-package com.example.ryan.workoutplanner;
+package com.example.ryan.workoutplanner.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,17 +8,22 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.ryan.workoutplanner.R;
+import com.example.ryan.workoutplanner.WorkoutPlannerApplication;
 import com.example.ryan.workoutplanner.models.Exercise;
 import com.example.ryan.workoutplanner.validators.InputValidator;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class AddAndEditExerciseActivity extends AppCompatActivity {
+    @Inject
+    InputValidator validator;
     public static final int ADD_EXERCISE_RESULT_CODE = 1;
     public static final int EDIT_EXERCISE_RESULT_CODE = 2;
     private boolean isEditing = false;
-    private InputValidator validator;
     private EditText exerciseName;
     private EditText weight;
     private EditText numSets;
@@ -31,6 +36,8 @@ public class AddAndEditExerciseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((WorkoutPlannerApplication) getApplication()).getAppComponent().inject(this);
+
         setContentView(R.layout.activity_add_and_edit_exercise);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -70,8 +77,6 @@ public class AddAndEditExerciseActivity extends AppCompatActivity {
                 saveExercise();
             }
         });
-
-        validator = new InputValidator();
     }
 
     private void setUpInputValidation(final EditText editText) {
