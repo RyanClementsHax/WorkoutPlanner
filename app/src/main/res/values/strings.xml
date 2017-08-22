@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Workout Planner</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="days_of_week">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday!</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+    <string-array name="day_descriptions">
+        <item>Chest and Triceps</item>
+        <item>Quads and Abs</item>
+        <item>Back and Biceps</item>
+        <item>Shoulders</item>
+        <item>Hams and Abs</item>
+        <item>Rest</item>
+        <item>Rest</item>
+    </string-array>
+    <string name="title_activity_day_view">Exercises</string>
+    <string name="title_activity_add_exercise">Add Exercise</string>
+    <string name="title_activity_edit_exercise">Edit Exercise</string>
+    <string name="empty_input_error_message">Must input a value</string>
+    <string name="add_exercise_result">add_exercise_result</string>
+    <string name="edit_exercise">edit_exercise</string>
+    <string name="edit_exercise_result">edit_exercise_result</string>
+    <string name="request_code">request_code</string>
+    <string name="week_view_preference_key">week_view_preference_key</string>
+    <string name="day_view_preference_key">day_view_preference_key</string>
+    <string name="is_first_time_app_start_up">is_first_time_app_start_up</string>
+    <string name="edit_day_description_alert_dialog_title">Edit Description</string>
+</resources>
