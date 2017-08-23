@@ -1,10 +1,12 @@
 package com.example.ryan.workoutplanner.modules;
 
 import android.app.Application;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.ryan.workoutplanner.adapters.DayViewAdapter;
-import com.example.ryan.workoutplanner.adapters.SharedPreferencesService;
+import com.example.ryan.workoutplanner.services.SharedPreferencesService;
 import com.example.ryan.workoutplanner.adapters.WeekViewAdapter;
 import com.example.ryan.workoutplanner.callbacks.ItemTouchHelperCallback;
 import com.example.ryan.workoutplanner.interfaces.IInputValidator;
@@ -33,8 +35,13 @@ public class AppModule {
     }
 
     @Provides
-    public ISharedPreferencesService provideSharedPreferencesAdapter(Application application, Gson gson) {
-        return new SharedPreferencesService(application, gson);
+    public SharedPreferences provideSharedPreferences(Application application) {
+        return PreferenceManager.getDefaultSharedPreferences(application);
+    }
+
+    @Provides
+    public ISharedPreferencesService provideSharedPreferencesAdapter(SharedPreferences sharedPreferences, Gson gson) {
+        return new SharedPreferencesService(sharedPreferences, gson);
     }
 
     @Provides
