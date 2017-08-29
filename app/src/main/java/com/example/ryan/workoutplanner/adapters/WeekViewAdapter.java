@@ -20,9 +20,13 @@ import java.util.List;
  * Created by Ryan on 8/8/2017.
  */
 public class WeekViewAdapter extends RecyclerView.Adapter<WeekViewAdapter.ViewHolder> {
-    private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
+    private ViewBinderHelper viewBinderHelper;
     private IRecyclerViewDataManager<DayOfWeek> dataManager;
     private List<DayOfWeek> daysOfWeek;
+
+    public WeekViewAdapter(ViewBinderHelper viewBinderHelper) {
+        this.viewBinderHelper = viewBinderHelper;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

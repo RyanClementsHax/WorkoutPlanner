@@ -20,9 +20,13 @@ import java.util.List;
  * Created by Ryan on 8/8/2017.
  */
 public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHolder> implements IItemTouchHelperAdapter {
-    private final ViewBinderHelper viewBinderHelper = new ViewBinderHelper();
+    private ViewBinderHelper viewBinderHelper;
     private List<Exercise> exercises;
     private IRecyclerViewDataManager<Exercise> dataManager;
+
+    public DayViewAdapter(ViewBinderHelper viewBinderHelper) {
+        this.viewBinderHelper = viewBinderHelper;
+    }
 
     @Override
     public DayViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,7 +40,7 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
     public void onBindViewHolder(DayViewAdapter.ViewHolder holder, int position) {
         Exercise exercise = exercises.get(position);
         viewBinderHelper.bind(holder.swipeRevealLayout, exercise.uuid.toString());
-        holder.setExercise(exercise);
+        holder.bind(exercise);
     }
 
     @Override
@@ -46,8 +50,8 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
 
     @Override
     public void onItemMove(int fromPosition, int toPosition) {
-        Exercise prev = exercises.remove(fromPosition);
-        exercises.add(toPosition, prev);
+        Exercise item = exercises.remove(fromPosition);
+        exercises.add(toPosition, item);
         notifyItemMoved(fromPosition, toPosition);
         dataManager.updateItems(exercises);
     }
@@ -58,13 +62,13 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nameTextView;
-        TextView weightTextView;
-        TextView numSetsTextView;
-        TextView numRepsTextView;
-        RelativeLayout editLayout;
-        RelativeLayout clearLayout;
-        SwipeRevealLayout swipeRevealLayout;
+        public TextView nameTextView;
+        public TextView weightTextView;
+        public TextView numSetsTextView;
+        public TextView numRepsTextView;
+        public RelativeLayout editLayout;
+        public RelativeLayout clearLayout;
+        public SwipeRevealLayout swipeRevealLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -78,7 +82,7 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
             this.swipeRevealLayout = (SwipeRevealLayout)itemView.findViewById(R.id.day_view_swipe_reveal_layout);
         }
 
-        public void setExercise(Exercise exercise) {
+        public void bind(Exercise exercise) {
             nameTextView.setText(exercise.name);
             if(exercise.weightUnit == Exercise.WeightUnit.NONE) {
                 weightTextView.setText(String.valueOf(exercise.weight));

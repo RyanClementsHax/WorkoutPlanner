@@ -5,12 +5,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.ryan.workoutplanner.adapters.DayViewAdapter;
-import com.example.ryan.workoutplanner.services.SharedPreferencesService;
 import com.example.ryan.workoutplanner.adapters.WeekViewAdapter;
 import com.example.ryan.workoutplanner.callbacks.ItemTouchHelperCallback;
 import com.example.ryan.workoutplanner.interfaces.IInputValidator;
 import com.example.ryan.workoutplanner.interfaces.ISharedPreferencesService;
+import com.example.ryan.workoutplanner.services.SharedPreferencesService;
 import com.example.ryan.workoutplanner.validators.InputValidator;
 import com.google.gson.Gson;
 
@@ -60,17 +61,22 @@ public class AppModule {
     }
 
     @Provides
-    public WeekViewAdapter provideWeekViewAdapter() {
-        return new WeekViewAdapter();
+    public WeekViewAdapter provideWeekViewAdapter(ViewBinderHelper viewBinderHelper) {
+        return new WeekViewAdapter(viewBinderHelper);
     }
 
     @Provides
-    public DayViewAdapter provideDayViewAdapter() {
-        return new DayViewAdapter();
+    public DayViewAdapter provideDayViewAdapter(ViewBinderHelper viewBinderHelper) {
+        return new DayViewAdapter(viewBinderHelper);
     }
 
     @Provides
     public LinearLayoutManager provideLinearLayoutManager(Application application) {
         return new LinearLayoutManager(application);
+    }
+
+    @Provides
+    public ViewBinderHelper provideViewBinderHelper() {
+        return new ViewBinderHelper();
     }
 }
