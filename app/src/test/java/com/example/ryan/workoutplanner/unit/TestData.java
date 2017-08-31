@@ -1,5 +1,6 @@
 package com.example.ryan.workoutplanner.unit;
 
+import com.example.ryan.workoutplanner.models.DayOfWeek;
 import com.example.ryan.workoutplanner.models.Exercise;
 
 import java.util.ArrayList;
@@ -18,5 +19,15 @@ public class TestData {
         exercises.add(new Exercise("3", 3, 3, 3, Exercise.WeightUnit.NONE, new ArrayList<String>()));
 
         return exercises;
+    }
+
+    public static List<DayOfWeek> createDayOfWeekList() {
+        List<DayOfWeek> days = new ArrayList<>();
+
+        days.add(new DayOfWeek("Test1", "TestDescription1"));
+        days.add(new DayOfWeek("Test2", "TestDescription2"));
+        days.add(new DayOfWeek("Test3", "TestDescription3"));
+
+        return days;
     }
 }

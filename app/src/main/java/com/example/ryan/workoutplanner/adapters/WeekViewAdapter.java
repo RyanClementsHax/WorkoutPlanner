@@ -30,12 +30,12 @@ public class WeekViewAdapter extends RecyclerView.Adapter<WeekViewAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.day_of_week, parent, false);
-        CardView cardView = (CardView) v.findViewById(R.id.card_view);
+        CardView cardView = (CardView) view.findViewById(R.id.card_view);
         cardView.setOnClickListener(dataManager.getItemClickListener());
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+
+        return new ViewHolder(view);
     }
 
     @Override
@@ -56,10 +56,10 @@ public class WeekViewAdapter extends RecyclerView.Adapter<WeekViewAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView dayOfWeekTextView;
-        TextView dayDescriptionTextView;
-        SwipeRevealLayout swipeRevealLayout;
-        RelativeLayout editLayout;
+        public TextView dayOfWeekTextView;
+        public TextView dayDescriptionTextView;
+        public SwipeRevealLayout swipeRevealLayout;
+        public RelativeLayout editLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
