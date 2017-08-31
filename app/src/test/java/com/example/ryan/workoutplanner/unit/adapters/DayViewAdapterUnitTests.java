@@ -65,7 +65,6 @@ public class DayViewAdapterUnitTests {
 
     @Before
     public void setUp() throws NoSuchFieldException, IllegalAccessException {
-        MockitoAnnotations.initMocks(this);
         PowerMockito.mockStatic(LayoutInflater.class);
         exerciseList = TestData.createExerciseList();
         dayViewAdapter = spy(dayViewAdapter);

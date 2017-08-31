@@ -9,8 +9,10 @@ import com.google.gson.reflect.TypeToken;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import static org.mockito.Mockito.when;
  * Created by Ryan on 8/22/2017.
  */
 
+@RunWith(MockitoJUnitRunner.class)
 public class SharedPreferencesServiceUnitTests {
     ISharedPreferencesService sharedPreferencesService;
     @Mock
@@ -40,8 +43,6 @@ public class SharedPreferencesServiceUnitTests {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         this.gson = new Gson();
         this.objectList = new ArrayList<>();
         this.objectList.add(new Object());

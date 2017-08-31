@@ -7,19 +7,21 @@ import com.example.ryan.workoutplanner.interfaces.IItemTouchHelperAdapter;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by Ryan on 8/30/2017.
  */
 
+@RunWith(MockitoJUnitRunner.class)
 public class ItemTouchHelperCallbackUnitTests {
     @Mock
     RecyclerView recyclerViewMock;
@@ -36,8 +38,6 @@ public class ItemTouchHelperCallbackUnitTests {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-
         itemTouchHelperCallback = new ItemTouchHelperCallback();
         itemTouchHelperCallback.setItemTouchHelperAdapter(itemTouchHelperAdapterMock);
     }

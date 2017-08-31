@@ -9,10 +9,8 @@ import com.chauthai.swipereveallayout.ViewBinderHelper;
 import com.example.ryan.workoutplanner.adapters.DayViewAdapter;
 import com.example.ryan.workoutplanner.adapters.WeekViewAdapter;
 import com.example.ryan.workoutplanner.callbacks.ItemTouchHelperCallback;
-import com.example.ryan.workoutplanner.interfaces.IInputValidator;
 import com.example.ryan.workoutplanner.interfaces.ISharedPreferencesService;
 import com.example.ryan.workoutplanner.services.SharedPreferencesService;
-import com.example.ryan.workoutplanner.validators.InputValidator;
 import com.google.gson.Gson;
 
 import dagger.Module;
@@ -53,11 +51,6 @@ public class AppModule {
     @Provides
     public ItemTouchHelperCallback provideItemTouchHelperCallback() {
         return new ItemTouchHelperCallback();
-    }
-
-    @Provides
-    public IInputValidator provideInputValidator() {
-        return new InputValidator();
     }
 
     @Provides

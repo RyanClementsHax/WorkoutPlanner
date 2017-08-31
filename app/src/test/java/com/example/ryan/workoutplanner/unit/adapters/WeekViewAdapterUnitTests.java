@@ -71,7 +71,6 @@ public class WeekViewAdapterUnitTests {
 
     @Before
     public void setUp() throws NoSuchFieldException, IllegalAccessException {
-        MockitoAnnotations.initMocks(this);
         PowerMockito.mockStatic(LayoutInflater.class);
         days = TestData.createDayOfWeekList();
         dayViewAdapter = spy(dayViewAdapter);
