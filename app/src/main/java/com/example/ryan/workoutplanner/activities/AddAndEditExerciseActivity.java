@@ -5,22 +5,18 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
 import com.example.ryan.workoutplanner.R;
 import com.example.ryan.workoutplanner.WorkoutPlannerApplication;
-import com.example.ryan.workoutplanner.interfaces.IInputValidator;
 import com.example.ryan.workoutplanner.models.Exercise;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 public class AddAndEditExerciseActivity extends AppCompatActivity {
-    @Inject
-    IInputValidator validator;
     public static final int ADD_EXERCISE_RESULT_CODE = 1;
     public static final int EDIT_EXERCISE_RESULT_CODE = 2;
     private boolean isEditing = false;
@@ -141,6 +137,6 @@ public class AddAndEditExerciseActivity extends AppCompatActivity {
     }
 
     private boolean isValidEditText(EditText editText) {
-        return !validator.isNullOrEmpty(editText.getText().toString());
+        return !TextUtils.isEmpty(editText.getText().toString());
     }
 }

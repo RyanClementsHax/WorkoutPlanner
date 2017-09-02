@@ -181,6 +181,8 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
             Exercise item = exercises.get(i);
             if(item.uuid.equals(exercise.uuid)) {
                 exercises.set(i, exercise);
+                recyclerViewAdapter.notifyDataSetChanged();
+                return;
             }
         }
     }

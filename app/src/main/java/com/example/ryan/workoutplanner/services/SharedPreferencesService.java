@@ -1,8 +1,6 @@
-package com.example.ryan.workoutplanner.adapters;
+package com.example.ryan.workoutplanner.services;
 
-import android.app.Application;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import com.example.ryan.workoutplanner.interfaces.ISharedPreferencesService;
 import com.google.gson.Gson;
@@ -17,8 +15,8 @@ public class SharedPreferencesService implements ISharedPreferencesService {
     private SharedPreferences sharedPreferences;
     private Gson gson;
 
-    public SharedPreferencesService(Application application, Gson gson) {
-        this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(application);
+    public SharedPreferencesService(SharedPreferences sharedPreferences, Gson gson) {
+        this.sharedPreferences = sharedPreferences;
         this.gson = gson;
     }
 
