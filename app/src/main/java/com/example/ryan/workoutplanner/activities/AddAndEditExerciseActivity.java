@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.example.ryan.workoutplanner.R;
 import com.example.ryan.workoutplanner.WorkoutPlannerApplication;
+import com.example.ryan.workoutplanner.config.StringConstants;
 import com.example.ryan.workoutplanner.models.Exercise;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 
@@ -55,10 +56,10 @@ public class AddAndEditExerciseActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        if(extras != null && extras.getInt(getResources().getString(R.string.request_code), 0) == EDIT_EXERCISE_RESULT_CODE) {
+        if(extras != null && extras.getInt(StringConstants.REQUEST_CODE, 0) == EDIT_EXERCISE_RESULT_CODE) {
             isEditing = true;
             getSupportActionBar().setTitle(getResources().getString(R.string.title_activity_edit_exercise));
-            exercise = (Exercise)extras.getSerializable(getResources().getString(R.string.edit_exercise));
+            exercise = (Exercise)extras.getSerializable(StringConstants.EDIT_EXERCISE);
             exerciseName.setText(exercise.name);
             weight.setText(String.valueOf(exercise.weight));
             numSets.setText(String.valueOf(exercise.numSets));
@@ -100,10 +101,10 @@ public class AddAndEditExerciseActivity extends AppCompatActivity {
             Intent resultIntent = new Intent(this, AddAndEditExerciseActivity.class);
             if(isEditing) {
                 resultExercise.uuid = exercise.uuid;
-                resultIntent.putExtra(getResources().getString(R.string.edit_exercise_result), resultExercise);
+                resultIntent.putExtra(StringConstants.EDIT_EXERCISE_RESULT, resultExercise);
                 setResult(EDIT_EXERCISE_RESULT_CODE, resultIntent);
             } else {
-                resultIntent.putExtra(getResources().getString(R.string.add_exercise_result), resultExercise);
+                resultIntent.putExtra(StringConstants.ADD_EXERCISE_RESULT, resultExercise);
                 setResult(ADD_EXERCISE_RESULT_CODE, resultIntent);
             }
             finish();

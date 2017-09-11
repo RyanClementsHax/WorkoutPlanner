@@ -12,6 +12,5 @@ public interface IRecyclerViewDataManager<T> {
     View.OnClickListener getItemClickListener();
     void removeItem(int position);
     void editItem(int position);
-    void updateItems(List<T> data);
     List<T> getItems();
 }

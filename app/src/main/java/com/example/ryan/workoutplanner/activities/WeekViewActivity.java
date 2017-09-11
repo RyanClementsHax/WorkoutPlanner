@@ -57,7 +57,7 @@ public class WeekViewActivity extends AppCompatActivity implements IRecyclerView
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        this.preferenceKey = getResources().getString(R.string.week_view_preference_key);
+        this.preferenceKey = StringConstants.WEEK_VIEW_PREFERENCE_KEY;
         this.dayListType = new TypeToken<List<DayOfWeek>>(){}.getType();
         this.daysOfWeek = (List<DayOfWeek>) sharedPreferencesService.getObject(preferenceKey, dayListType);
         if(daysOfWeek == null) {
@@ -153,22 +153,13 @@ public class WeekViewActivity extends AppCompatActivity implements IRecyclerView
     }
 
     @Override
-    public void updateItems(List<DayOfWeek> data) {
-        //don't care about this
-    }
-
-    @Override
     public List<DayOfWeek> getItems() {
         return daysOfWeek;
     }
 
     private void setUpIfFirstTimeAppStartUp() {
-        SharedPreferences preferences = getSharedPreferences(getResources().getString(R.string.week_view_preference_key), Context.MODE_PRIVATE);
-        String firstTimeKey = getResources().getString(R.string.is_first_time_app_start_up);
-        if(preferences.getBoolean(firstTimeKey, true)) {
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean(firstTimeKey, false);
-            editor.commit();
+        if(sharedPreferencesService.getBoolean(StringConstants.IS_FIRST_TIME_APP_STARTUP_KEY, true)) {
+            sharedPreferencesService.putBoolean(StringConstants.IS_FIRST_TIME_APP_STARTUP_KEY, false);
 
             List<String> days = Arrays.asList(getResources().getStringArray(R.array.days_of_week));
             List<String> descriptions = Arrays.asList(getResources().getStringArray(R.array.day_descriptions));

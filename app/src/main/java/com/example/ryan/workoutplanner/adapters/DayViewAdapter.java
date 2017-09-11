@@ -53,7 +53,6 @@ public class DayViewAdapter extends RecyclerView.Adapter<DayViewAdapter.ViewHold
         Exercise item = exercises.remove(fromPosition);
         exercises.add(toPosition, item);
         notifyItemMoved(fromPosition, toPosition);
-        dataManager.updateItems(exercises);
     }
 
     public void setDataManager(IRecyclerViewDataManager<Exercise> dataManager) {

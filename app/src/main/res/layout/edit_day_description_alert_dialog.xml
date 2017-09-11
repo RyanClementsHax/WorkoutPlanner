@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Day Description"
-            android:inputType="text" />
+            android:inputType="textCapWords" />
 
     </android.support.design.widget.TextInputLayout>
 </RelativeLayout>
