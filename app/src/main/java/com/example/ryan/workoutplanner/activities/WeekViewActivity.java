@@ -85,8 +85,8 @@ public class WeekViewActivity extends AppCompatActivity implements IRecyclerView
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onPause() {
+        super.onPause();
         sharedPreferencesService.updateObject(preferenceKey, dayListType, daysOfWeek);
     }
 

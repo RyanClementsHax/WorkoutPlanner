@@ -102,16 +102,6 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
     @Override
     public void onPause() {
         super.onPause();
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(StringConstants.DAY, dayOfWeek);
-        editor.putString(StringConstants.DAY_DESCRIPTION, dayDescription);
-        editor.commit();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
         sharedPreferencesAdapter.updateObject(dayOfWeek, exerciseListType, exercises);
     }
 
