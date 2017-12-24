@@ -157,8 +157,7 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
         exercises.add(exercise);
         recyclerViewAdapter.notifyDataSetChanged();
 
-        noExercisesMessage.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
+        setEmptyMessageIfExercisesEmpty();
     }
 
     private void editExercise(Exercise exercise) {

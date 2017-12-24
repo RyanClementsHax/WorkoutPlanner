@@ -49,7 +49,7 @@ public class WeekViewActivityInstrumentationTests {
     private WeekViewActivity weekViewActivity;
     private String[] daysOfWeek;
     private String[] dayDescriptions;
-    private int testPosition;
+    private int testPosition = 1;
 
     @Before
     public void setUp() {
@@ -60,7 +60,7 @@ public class WeekViewActivityInstrumentationTests {
 
         daysOfWeek = weekViewActivity.getResources().getStringArray(R.array.days_of_week);
         dayDescriptions = weekViewActivity.getResources().getStringArray(R.array.day_descriptions);
-        testPosition = 1;
+
         assertTrue(daysOfWeek.length == dayDescriptions.length);
     }
 
