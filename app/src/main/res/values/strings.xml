@@ -23,12 +23,5 @@
     <string name="title_activity_add_exercise">Add Exercise</string>
     <string name="title_activity_edit_exercise">Edit Exercise</string>
     <string name="empty_input_error_message">Must input a value</string>
-    <string name="add_exercise_result">add_exercise_result</string>
-    <string name="edit_exercise">edit_exercise</string>
-    <string name="edit_exercise_result">edit_exercise_result</string>
-    <string name="request_code">request_code</string>
-    <string name="week_view_preference_key">week_view_preference_key</string>
-    <string name="day_view_preference_key">day_view_preference_key</string>
-    <string name="is_first_time_app_start_up">is_first_time_app_start_up</string>
     <string name="edit_day_description_alert_dialog_title">Edit Description</string>
 </resources>

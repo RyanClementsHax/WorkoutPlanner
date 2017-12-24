@@ -10,4 +10,6 @@ public interface ISharedPreferencesService {
 
     Object getObject(String preferenceKey, Type type);
     void updateObject(String preferenceKey, Type type, Object newItem);
+    boolean getBoolean(String preferenceKey, boolean defaultValue);
+    void putBoolean(String preferenceKey, boolean value);
 }

@@ -29,4 +29,14 @@ public class SharedPreferencesService implements ISharedPreferencesService {
         editor.putString(preferenceKey, gson.toJson(newItem, type));
         editor.commit();
     }
+
+    public boolean getBoolean(String preferenceKey, boolean defaultValue) {
+        return sharedPreferences.getBoolean(preferenceKey, defaultValue);
+    }
+
+    public void putBoolean(String preferenceKey, boolean value) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(preferenceKey, value);
+        editor.commit();
+    }
 }

@@ -102,22 +102,12 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
     @Override
     public void onPause() {
         super.onPause();
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString(StringConstants.DAY, dayOfWeek);
-        editor.putString(StringConstants.DAY_DESCRIPTION, dayDescription);
-        editor.commit();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
         sharedPreferencesAdapter.updateObject(dayOfWeek, exerciseListType, exercises);
     }
 
     @Override
     public void startActivityForResult(Intent intent, int requestCode) {
-        intent.putExtra(getResources().getString(R.string.request_code), requestCode);
+        intent.putExtra(StringConstants.REQUEST_CODE, requestCode);
         super.startActivityForResult(intent, requestCode);
     }
 
@@ -129,10 +119,10 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
 
         Exercise exercise = null;
         if(requestCode == AddAndEditExerciseActivity.ADD_EXERCISE_RESULT_CODE) {
-            exercise = (Exercise)data.getExtras().getSerializable(getResources().getString(R.string.add_exercise_result));
+            exercise = (Exercise)data.getExtras().getSerializable(StringConstants.ADD_EXERCISE_RESULT);
             addExercise(exercise);
         } else if(requestCode == AddAndEditExerciseActivity.EDIT_EXERCISE_RESULT_CODE) {
-            exercise = (Exercise)data.getExtras().getSerializable(getResources().getString(R.string.edit_exercise_result));
+            exercise = (Exercise)data.getExtras().getSerializable(StringConstants.EDIT_EXERCISE_RESULT);
             editExercise(exercise);
         }
 
@@ -154,13 +144,8 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
     public void editItem(int position) {
         Exercise exercise = exercises.get(position);
         Intent intent = new Intent(this, AddAndEditExerciseActivity.class);
-        intent.putExtra(getResources().getString(R.string.edit_exercise), exercise);
+        intent.putExtra(StringConstants.EDIT_EXERCISE, exercise);
         startActivityForResult(intent, AddAndEditExerciseActivity.EDIT_EXERCISE_RESULT_CODE);
-    }
-
-    @Override
-    public void updateItems(List<Exercise> data) {
-        sharedPreferencesAdapter.updateObject(dayOfWeek, exerciseListType, data);
     }
 
     @Override
@@ -172,8 +157,7 @@ public class DayViewActivity extends AppCompatActivity implements IRecyclerViewD
         exercises.add(exercise);
         recyclerViewAdapter.notifyDataSetChanged();
 
-        noExercisesMessage.setVisibility(View.GONE);
-        recyclerView.setVisibility(View.VISIBLE);
+        setEmptyMessageIfExercisesEmpty();
     }
 
     private void editExercise(Exercise exercise) {
